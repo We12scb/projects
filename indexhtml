@@ -1,0 +1,99 @@
+https://github.com/We12scb/projects/edit/cipher_webapp/static
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProCipher - Advanced Encryption Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <h1>🔐 ProCipher</h1>
+            <p>Secure. Fast. Universal.</p>
+        </header>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="algorithm">Algorithm</label>
+                <select name="algorithm" id="algorithm" required>
+                    <option value="caesar">Caesar Cipher</option>
+                    <option value="vigenere">Vigenère Cipher</option>
+                    <option value="rail">Rail Fence Cipher</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mode">Operation Mode</label>
+                <select name="mode" id="mode" required onchange="toggleKeyInput()">
+                    <option value="encrypt">Encrypt</option>
+                    <option value="decrypt">Decrypt</option>
+                    <option value="break">Break (Brute Force)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="text">Input Text</label>
+                <textarea name="text" id="text" rows="4" placeholder="Enter text here..." required></textarea>
+            </div>
+
+            <div class="form-group" id="key-group">
+                <label for="key">Key / Shift / Rails</label>
+                <input type="text" name="key" id="key" placeholder="Enter secret key">
+            </div>
+
+            <button type="submit" class="btn-process">Process Request</button>
+        </form>
+
+        {% if result %}
+        <div class="result-container">
+            <h3>Output Result</h3>
+            {% if is_list %}
+            <ul class="result-list">
+                {% for item in result %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="result-box">
+                <p>{{ result }}</p>
+                <button class="btn-copy" onclick="copyToClipboard()">Copy</button>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleKeyInput() {
+            const mode = document.getElementById('mode').value;
+            const keyGroup = document.getElementById('key-group');
+            const keyInput = document.getElementById('key');
+
+            if (mode === 'break') {
+                keyGroup.style.display = 'none';
+                keyInput.required = false;
+            } else {
+                keyGroup.style.display = 'block';
+                keyInput.required = true;
+            }
+        }
+
+        function copyToClipboard() {
+            const text = document.querySelector('.result-box p').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+
+        // Initial check
+        toggleKeyInput();
+    </script>
+</body>
+
+</html>
