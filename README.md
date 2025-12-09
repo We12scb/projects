@@ -21,6 +21,15 @@ ProCipher is a modern, secure, and user-friendly web application for encryption 
 
 ## 🚀 How to Run
 
+0.create folder
+. cipher_webapp/
+│
+├── app.py
+├── static/
+│   └── style.css
+└── templates/
+    └── index.html
+
 1.  **Prerequisites**:
     -   Python 3.x
     -   Flask (`pip install flask`)
@@ -41,6 +50,7 @@ ProCipher is a modern, secure, and user-friendly web application for encryption 
 
 4.  **Access the App**:
     -   Open your browser and go to: `http://127.0.0.1:5000`
+
 
 ## 🛠️ Usage
 
