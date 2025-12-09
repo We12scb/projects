@@ -23,12 +23,18 @@ ProCipher is a modern, secure, and user-friendly web application for encryption 
 
 0.create folder
 . cipher_webapp/
+
 │
 ├── app.py
+
 ├── static/
+
 │   └── style.css
+
 └── templates/
+
     └── index.html
+    
 
 1.  **Prerequisites**:
     -   Python 3.x
